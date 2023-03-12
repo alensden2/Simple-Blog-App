@@ -20,8 +20,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }
 }));
 
-
-
 const rows = [
   createData('Tom', 'German Shepherd', 6.0, 'Male', '854613'),
   createData('Jerry', 'Bulldog', 9.0, 'Male', '854613'),
@@ -38,8 +36,6 @@ function createData(
 ) {
   return { name, type, age, gender, owner };
 }
-
-
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
