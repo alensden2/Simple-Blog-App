@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const Joi = require("@hapi/joi");
-const { registrationValidation } = require("./validation");
+const { registrationValidation, loginValidation } = require("./validation");
 const bcrypt = require("bcrypt");
 
 router.post("/register", async (req, res) => {
@@ -32,8 +32,18 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post('/login', (req, res) => {
-    
-})
+router.post("/login", async (req, res) => {
+  // validate the req obj
+  const { error } = loginValidation(req.body);
+  if (error) return res.status(400).send(error);
+  // check if the email exists and pulling the record in the 'user'
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) return res.status(400).send("Email invalid");
+
+  // comparing the pass word
+  const validPass = await bcrypt.compare(req.body.password, user.password);
+  if (!validPass) return res.status(400).send("Invalid Password");
+  res.send("logged in");
+});
 
 module.exports = router;
