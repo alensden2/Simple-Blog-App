@@ -5,6 +5,7 @@ const { user, password } = require("./db-config");
 const env = require("dotenv").config();
 // Importing routes
 const authRoute = require("./routes/auth");
+const posts = require('./routes/posts')
 
 // MongoDB Connection
 mongoose
@@ -24,7 +25,8 @@ app.use(express.json());
 
 // Route middleware
 app.use("/api/user", authRoute);
+app.use("/users/post", posts);
 
-app.listen(3000, () => {
+app.listen(8080, () => {
   console.log("server running");
 });
