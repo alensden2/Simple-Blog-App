@@ -1,0 +1,26 @@
+    .modal-header {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+    
+    .modal-body {
+      background-color: #f5c6cb;
+      color: #721c24;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    
+    .modal-footer {
+      background-color: #f8d7da;
+      justify-content: center;
+    }
+    
+    button {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+    
+    button:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
