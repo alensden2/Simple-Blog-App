@@ -15,7 +15,7 @@ router.post("/register", async (req, res) => {
   // checking if the user already has an email in the database
   const emailExist = await User.findOne({ email: req.body.email });
   if (emailExist) {
-    res.status(400).send("Email already exists");
+    return res.status(400).send("Email already exists");
   }
 
   // HASH password
@@ -59,8 +59,8 @@ router.post("/login", async (req, res) => {
   );
 
   res.header('auth-token', token);
-  res.send('Logged in successfully');
-  
+  // res.send('Logged in successfully');
+  res.status(200).json({token: token});
 });
 
 module.exports = router;
