@@ -5,7 +5,8 @@ const { user, password } = require("./db-config");
 const env = require("dotenv").config();
 // Importing routes
 const authRoute = require("./routes/auth");
-const posts = require('./routes/posts')
+const posts = require("./routes/posts");
+const cors = require("cors");
 
 // MongoDB Connection
 mongoose
@@ -19,6 +20,9 @@ mongoose
   .catch((error) => {
     console.error("Error connectiong to DB", error);
   });
+
+// enabling Cors
+app.use(cors());
 
 // Middleware
 app.use(express.json());

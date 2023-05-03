@@ -8,11 +8,15 @@ const jwt = require("jsonwebtoken");
 router.post("/register", async (req, res) => {
   // validation for object (request)
   const { error } = registrationValidation(req.body);
-  if (error) return res.status(400).send(error);
-
+  if (error) {
+    res.status(400).send(error);
+    return; // add this line to stop further execution of the function
+  }
   // checking if the user already has an email in the database
   const emailExist = await User.findOne({ email: req.body.email });
-  if (emailExist) return res.status(400).send("Email already exist");
+  if (emailExist) {
+    res.status(400).send("Email already exists");
+  }
 
   // HASH password
   const salt = await bcrypt.genSalt(10);
@@ -27,7 +31,8 @@ router.post("/register", async (req, res) => {
   try {
     const saveUser = await user.save();
     console.log("user saved :", saveUser);
-    res.send(saveUser);
+    // res.send(saveUser);
+    res.send("User Registered")
   } catch (error) {
     res.status(400).send(error);
   }
