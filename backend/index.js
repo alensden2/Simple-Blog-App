@@ -29,7 +29,7 @@ app.use(express.json());
 
 // Route middleware
 app.use("/api/user", authRoute);
-app.use("/users/post", posts);
+app.use("/jwtToken/verify", posts);
 
 app.listen(8080, () => {
   console.log("server running");
